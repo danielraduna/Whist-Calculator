@@ -2,8 +2,6 @@
   <button  class="gradient-border" (click)="open(selectNumberPlayers)" *ngIf="numberOfPlayers === 0">Start</button>
 </div>
 
-
-
   <ng-template #selectNumberPlayers let-modal>
     <div class="title">
       <h1>Alege numarul de jucatori</h1>
@@ -21,7 +19,7 @@
       <h1>Numele jucatorului ({{indexPlayer}}/{{numberOfPlayers}})</h1>
     </div>
     <div class="usernameSetting">
-      <input class="username" type="text" placeholder="Scrieti un nume" pInputText  [(ngModel)]="users[indexPlayer - 1].name">
+      <input class="username" type="text" placeholder="Scrieti un nume" pInputText  [(ngModel)]="users[indexPlayer - 1].name" (keyup.enter)="incrementIndexPlayer()">
     </div>
 
     <div class="usernamebuttons">
@@ -85,6 +83,7 @@
         <th  *ngFor="let user of users" style="text-align: center;">
           {{user.name}}
         </th>
+        <th class="col-sm-1">Retry</th>
       </tr>
       </thead>
       <tbody>
@@ -97,11 +96,10 @@
               <p-button *ngIf="currentUser === user && currentRound === round && currentRound.pointsLoading === true" styleClass="p-button-sm p-button-success"  icon="pi pi-plus"  pTooltip="Adauga puncte" tooltipPosition="top" (onClick)="open(setPoints)" ></p-button>
             </div>
           </div>
-
+        </td>
+        <td class="col-sm-1">
+          <p-button *ngIf="currentRound === round" styleClass="p-button-sm p-button-success"  icon="pi pi-replay"  pTooltip="Reincarca runda" tooltipPosition="top"></p-button>
         </td>
       </tr>
       </tbody>
     </table>
-
-
-

@@ -1,7 +1,6 @@
-import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {User} from "./entities/user.model";
-import {NgbActiveModal, NgbModal, NgbModalOptions, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {NgTemplateOutlet} from "@angular/common";
+import {NgbModal, NgbModalOptions, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {Round} from "./entities/round";
 
 @Component({
@@ -47,6 +46,7 @@ export class AppComponent implements OnInit{
         streak: 0
       });
     }
+
     this.currentUser = this.users[0];
     for(i = 0; i < x; i++) {
       this.rounds.push( {
@@ -64,7 +64,8 @@ export class AppComponent implements OnInit{
         pointsLoading: false
       });
     }
-    for(i = 2; i <= 7; i++){
+
+    for(i = 2; i <= 7; i++) {
       this.rounds.push({
         nrCarti: i,
         jucator: {
@@ -96,7 +97,7 @@ export class AppComponent implements OnInit{
         pointsLoading: false
       });
     }
-    for(i = 7; i >= 2; i--){
+    for(i = 7; i >= 2; i--) {
       this.rounds.push({
         nrCarti: i,
         jucator: {
@@ -112,6 +113,7 @@ export class AppComponent implements OnInit{
         pointsLoading: false
       });
     }
+
     for(i = 0; i < x; i++) {
       this.rounds.push({
         nrCarti: 1,
@@ -183,8 +185,6 @@ export class AppComponent implements OnInit{
       }
       else
         trs[this.indexRound + 1].children[this.indexPlayer].className = "win";
-
-
     }
     else {
       this.currentUser!.streak = 0;
@@ -225,7 +225,6 @@ export class AppComponent implements OnInit{
       this.indexPlayer = 1;
     }
     this.currentUser = this.users[this.indexPlayer - 1];
-
   }
 
   incrementIndexPlayer() {
