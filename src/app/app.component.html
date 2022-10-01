@@ -1,1 +1,107 @@
-<p-table></p-table>
+<div class="start" *ngIf="!visible && !done">
+  <button  class="gradient-border" (click)="open(selectNumberPlayers)" *ngIf="numberOfPlayers === 0">Start</button>
+</div>
+
+
+
+  <ng-template #selectNumberPlayers let-modal>
+    <div class="title">
+      <h1>Alege numarul de jucatori</h1>
+    </div>
+    <div class="numberOfPlayersButtons">
+      <button (click)="setNumberOfPlayers(3); open(setPlayerName)">3</button>
+      <button (click)="setNumberOfPlayers(4); open(setPlayerName)">4</button>
+      <button (click)="setNumberOfPlayers(5); open(setPlayerName)">5</button>
+      <button (click)="setNumberOfPlayers(6); open(setPlayerName)">6</button>
+    </div>
+  </ng-template>
+
+  <ng-template #setPlayerName let-modal>
+    <div class="title">
+      <h1>Numele jucatorului ({{indexPlayer}}/{{numberOfPlayers}})</h1>
+    </div>
+    <div class="usernameSetting">
+      <input class="username" type="text" placeholder="Scrieti un nume" pInputText  [(ngModel)]="users[indexPlayer - 1].name">
+    </div>
+
+    <div class="usernamebuttons">
+      <p-button styleClass="p-button-success" label="Urmatorul" icon="pi pi-arrow-right" iconPos="right" (onClick)="incrementIndexPlayer()"></p-button>
+    </div>
+  </ng-template>
+
+  <ng-template #setBet let-modal>
+    <div class="title">
+      <h1>Alege un pariu</h1>
+    </div>
+    <div class="numberOfPlayersButtons">
+      <button *ngIf="!(rounds[indexRound].sumaPariuri === rounds[indexRound].nrCarti && rounds[indexRound].nrPariuri == numberOfPlayers - 1)" (click)="setPlayerBet(0)">0</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 1 && !(rounds[indexRound].sumaPariuri + 1 === rounds[indexRound].nrCarti && rounds[indexRound].nrPariuri == numberOfPlayers - 1)" (click)="setPlayerBet(1)">1</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 2  && !(rounds[indexRound].sumaPariuri + 2 === rounds[indexRound].nrCarti && rounds[indexRound].nrPariuri == numberOfPlayers - 1)" (click)="setPlayerBet(2)">2</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 3 && !(rounds[indexRound].sumaPariuri + 3 === rounds[indexRound].nrCarti && rounds[indexRound].nrPariuri == numberOfPlayers - 1)"(click)="setPlayerBet(3)">3</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 4 && !(rounds[indexRound].sumaPariuri + 4 === rounds[indexRound].nrCarti && rounds[indexRound].nrPariuri == numberOfPlayers - 1)" (click)="setPlayerBet(4)">4</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 5 && !(rounds[indexRound].sumaPariuri + 5 === rounds[indexRound].nrCarti && rounds[indexRound].nrPariuri == numberOfPlayers - 1)" (click)="setPlayerBet(5)">5</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 6 && !(rounds[indexRound].sumaPariuri + 6 === rounds[indexRound].nrCarti && rounds[indexRound].nrPariuri == numberOfPlayers - 1)" (click)="setPlayerBet(6)">6</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 7 && !(rounds[indexRound].sumaPariuri + 7 === rounds[indexRound].nrCarti && rounds[indexRound].nrPariuri == numberOfPlayers - 1)" (click)="setPlayerBet(7)">7</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 8 && !(rounds[indexRound].sumaPariuri + 8 === rounds[indexRound].nrCarti && rounds[indexRound].nrPariuri == numberOfPlayers - 1)" (click)="setPlayerBet(8)">8</button>
+    </div>
+  </ng-template>
+
+  <ng-template #setPoints let-modal>
+    <div class="title">
+      <h1>Cate maini a luat {{currentUser!.name}}?</h1>
+    </div>
+    <div class="numberOfPlayersButtons">
+      <button (click)="setPlayerResult(0)">0</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 1" (click)="setPlayerResult(1)">1</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 2" (click)="setPlayerResult(2)">2</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 3" (click)="setPlayerResult(3)">3</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 4" (click)="setPlayerResult(4)">4</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 5" (click)="setPlayerResult(5)">5</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 6" (click)="setPlayerResult(6)">6</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 7" (click)="setPlayerResult(7)">7</button>
+      <button *ngIf="rounds[indexRound].nrCarti >= 8" (click)="setPlayerResult(8)">8</button>
+    </div>
+  </ng-template>
+
+  <ng-template #winnerModal >
+    <div class="title" style="height: 400px">
+      <h1>{{winner!.name}} A CASTIGAT!</h1>
+      <img src="assets/trophy.png">
+
+    </div>
+    <div>
+      <div class="pyro" *ngIf="done">
+        <div class="before"></div>
+        <div class="after"></div>
+      </div>
+    </div>
+
+  </ng-template>
+
+    <table class="table table-lg  table-hover table-bordered" *ngIf="visible">
+      <thead class="thead-dark">
+      <tr>
+        <th class="col-sm-1">Nr Carti</th>
+        <th  *ngFor="let user of users" style="text-align: center;">
+          {{user.name}}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let round of rounds">
+        <td class="col-sm-1">{{round.nrCarti}}</td>
+        <td class="col-lg-auto" *ngFor="let user of round.jucatori" style="text-align: center;">
+          <div  class="celula">
+            <div class="buton">
+              <p-button *ngIf="currentUser === user && currentRound === round && currentRound.betsLoading === true" styleClass="p-button-sm p-button-success"  icon="pi pi-plus"  pTooltip="Pune un pariu" tooltipPosition="top" (onClick)="open(setBet)"></p-button>
+              <p-button *ngIf="currentUser === user && currentRound === round && currentRound.pointsLoading === true" styleClass="p-button-sm p-button-success"  icon="pi pi-plus"  pTooltip="Adauga puncte" tooltipPosition="top" (onClick)="open(setPoints)" ></p-button>
+            </div>
+          </div>
+
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+
