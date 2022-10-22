@@ -76,7 +76,7 @@
 
   </ng-template>
 
-    <table class="table table-lg  table-hover table-bordered" *ngIf="visible">
+    <table class="table table-lg table-hover table-bordered" *ngIf="visible">
       <thead class="thead-dark">
       <tr>
         <th class="col-sm-1">Nr Carti</th>
@@ -90,15 +90,15 @@
       <tr *ngFor="let round of rounds">
         <td class="col-sm-1">{{round.nrCarti}}</td>
         <td class="col-lg-auto" *ngFor="let user of round.jucatori" style="text-align: center;">
-          <div  class="celula">
+          <div class="celula">
             <div class="buton">
-              <p-button *ngIf="currentUser === user && currentRound === round && currentRound.betsLoading === true" styleClass="p-button-sm p-button-success"  icon="pi pi-plus"  pTooltip="Pune un pariu" tooltipPosition="top" (onClick)="open(setBet)"></p-button>
-              <p-button *ngIf="currentUser === user && currentRound === round && currentRound.pointsLoading === true" styleClass="p-button-sm p-button-success"  icon="pi pi-plus"  pTooltip="Adauga puncte" tooltipPosition="top" (onClick)="open(setPoints)" ></p-button>
+              <p-button *ngIf="currentUser === user && currentRound === round && currentRound.betsLoading === true" styleClass="p-button-sm p-button-success" icon="pi pi-plus" pTooltip="Pune un pariu" tooltipPosition="top" (onClick)="open(setBet)"></p-button>
+              <p-button *ngIf="currentUser === user && currentRound === round && currentRound.pointsLoading === true" styleClass="p-button-sm p-button-success" icon="pi pi-plus" pTooltip="Adauga puncte" tooltipPosition="top" (onClick)="open(setPoints)"></p-button>
             </div>
           </div>
         </td>
         <td class="col-sm-1">
-          <p-button *ngIf="currentRound === round" styleClass="p-button-sm p-button-success"  icon="pi pi-replay"  pTooltip="Reincarca runda" tooltipPosition="top"></p-button>
+          <p-button *ngIf="currentRound === round" styleClass="p-button-sm p-button-success" icon="pi pi-replay" pTooltip="Reincarca runda" tooltipPosition="top" (onClick)="replayRound()"></p-button>
         </td>
       </tr>
       </tbody>

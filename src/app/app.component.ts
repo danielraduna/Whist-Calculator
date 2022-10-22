@@ -165,7 +165,6 @@ export class AppComponent implements OnInit{
       }
 
       this.currentUser = this.users[this.indexPlayer - 1];
-      console.log(this.currentRound);
       this.modalService.dismissAll();
   }
 
@@ -175,7 +174,6 @@ export class AppComponent implements OnInit{
 
     if(this.currentUser?.bet === points) {
       this.currentUser.streak++;
-      console.log(this.currentUser.streak);
 
       this.currentUser.points += points + 5;
       if(this.currentUser.streak === 5) {
@@ -248,5 +246,19 @@ export class AppComponent implements OnInit{
     else if(this.users[this.indexPlayer - 1].name !== ""){
       this.indexPlayer++;
     }
+  }
+
+  replayRound(): void {
+    let trs = document.getElementsByTagName('tr');
+
+    this.currentRound!.sumaPariuri = this.currentRound!.nrPariuri = 0;
+    this.currentRound!.jucatori.forEach(player => {
+      player.bet = 0;
+    });
+    this.currentRound!.betsLoading = true;
+    this.currentRound!.pointsLoading = false;
+    this.currentUser = this.currentRound!.jucator;
+
+    console.log(this.indexPlayer);
   }
 }
