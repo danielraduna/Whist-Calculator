@@ -258,7 +258,17 @@ export class AppComponent implements OnInit{
     this.currentRound!.betsLoading = true;
     this.currentRound!.pointsLoading = false;
     this.currentUser = this.currentRound!.jucator;
+    for(let i = 0; i <= this.currentRound!.jucatori.length; i++) {
+      if(this.currentRound?.jucatori[i] === this.currentRound!.jucator) {
+        this.indexPlayer = i + 1;
+      }
 
-    console.log(this.indexPlayer);
+      while(trs[this.indexRound + 1].children[i].childNodes[0].childNodes.length > 1) {
+        trs[this.indexRound + 1].children[this.indexPlayer].className = "";
+        trs[this.indexRound + 1].children[i].childNodes[0].removeChild(trs[this.indexRound + 1].children[i].childNodes[0].lastChild!);
+      }
+    }
+
+
   }
 }
