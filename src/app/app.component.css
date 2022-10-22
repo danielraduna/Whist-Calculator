@@ -33,23 +33,6 @@
   box-shadow: 5px 5px 5px black;
 }
 
-.start button {
-  cursor: pointer;
-  border: 0;
-  border-radius: 20px;
-  padding: 45px;
-  font-weight: bold;
-  font-size: 20px;
-  background: lightskyblue;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.24);
-  transition:0.6s cubic-bezier(0.01, 1.69,    0.99, 0.94);
-
-}
-.start button:hover {
-  transform: scale(1.4);
-  box-shadow: 5px 5px 5px black;
-}
-
 .usernameSetting {
   display: flex;
   justify-content: center;
@@ -83,6 +66,8 @@ table {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  background: #faf5f5;
+  margin-top: 25px;
 }
 
 .win {
@@ -102,6 +87,23 @@ table {
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+.start button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 20px;
+  padding: 75px;
+  font-weight: bold;
+  font-size: 50px;
+  background: lightskyblue;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.24);
+  transition:0.6s cubic-bezier(0.01, 1.69,    0.99, 0.94);
+
+}
+.start button:hover {
+  transform: scale(1.4);
+  box-shadow: 5px 5px 5px black;
 }
 
 .pyro>.before,
