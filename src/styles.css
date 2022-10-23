@@ -49,3 +49,20 @@ body{
   from {background-position:0 0;}
   to {background-position: 500px 0;}
 }
+
+::-webkit-scrollbar {
+  width: 1.7em;
+}
+
+::-webkit-scrollbar-track {
+  background: lightskyblue;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00bbff;
+  border-radius: 30px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #009fe0;
+}
