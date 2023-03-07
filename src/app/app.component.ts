@@ -2,6 +2,7 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {User} from "./entities/user.model";
 import {NgbModal, NgbModalOptions, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {Round} from "./entities/round";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-root',
@@ -25,8 +26,8 @@ export class AppComponent implements OnInit{
   indexRound = 0;
   currentRound?: Round;
   winner?: User;
-
-  constructor(private modalService: NgbModal) {
+  minimCard?: number;
+  constructor(private modalService: NgbModal, private toastr: ToastrService) {
 
   }
   ngOnInit(): void {
@@ -130,7 +131,18 @@ export class AppComponent implements OnInit{
         pointsLoading: false
       });
     }
-
+    if (this.numberOfPlayers === 3) {
+      this.minimCard = 9;
+    }
+    else if (this.numberOfPlayers === 4) {
+      this.minimCard = 7;
+    }
+    else if (this.numberOfPlayers === 5) {
+      this.minimCard = 5;
+    }
+    else if (this.numberOfPlayers === 6) {
+      this.minimCard = 6;
+    }
 
   }
 
@@ -241,7 +253,9 @@ export class AppComponent implements OnInit{
       });
       this.currentRound = this.rounds[0];
       this.indexPlayer = 1;
-
+      this.toastr.success("Cea mai mica carte este " + this.minimCard, "Cartea de joc minima",{
+        progressBar: true
+      });
     }
     else if(this.users[this.indexPlayer - 1].name !== ""){
       this.indexPlayer++;

@@ -8,6 +8,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from "@angular/forms";
 import {ButtonModule} from 'primeng/button';
 import {TooltipModule} from 'primeng/tooltip';
+import {ToastrModule} from "ngx-toastr";
 @NgModule({
   declarations: [
     AppComponent
@@ -19,7 +20,11 @@ import {TooltipModule} from 'primeng/tooltip';
     NgbModule,
     FormsModule,
     ButtonModule,
-    TooltipModule
+    TooltipModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
